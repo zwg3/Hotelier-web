@@ -1,4 +1,14 @@
+using Hotelier_web.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
+using System.Reflection.Metadata;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<HotelDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ??
+    throw new InvalidOperationException("Connection string'DefaultConnection' not found.")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -25,3 +35,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+

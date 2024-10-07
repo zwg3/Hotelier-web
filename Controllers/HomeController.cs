@@ -1,21 +1,25 @@
 using Hotelier_web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
 
 namespace Hotelier_web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HotelDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(HotelDbContext context)
         {
-            _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(context.Permissions.ToList());
+           
         }
 
         public IActionResult Privacy()

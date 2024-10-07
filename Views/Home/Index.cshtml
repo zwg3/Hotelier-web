@@ -1,8 +1,38 @@
-﻿@{
+﻿@* @model IEnumerable<Hotelier_web.Models.User> *@
+@model IEnumerable<Hotelier_web.Models.Permission>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<h1 class="display-4">Welcome to the HOTELIER-WEB aplication!</h1>
 <div class="text-center">
-    <h1 class="display-4">WOW</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>List of users</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateReservations)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ManageReservations)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateReservations)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ManageReservations)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
 </div>
